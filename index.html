@@ -4,116 +4,208 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marcondes Bebidas</title>
+
 <style>
-body{font-family:Arial;margin:0;background:#111;color:white}
-header{background:#000;padding:20px;text-align:center}
-h1{color:#d4af37;margin:0}
-.container{padding:20px}
-.produto{background:#1e1e1e;padding:15px;margin:10px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
-button{background:#25d366;border:none;padding:8px 12px;color:white;border-radius:5px;cursor:pointer}
-.carrinho{position:fixed;bottom:0;width:100%;background:#000;padding:15px}
-input,select{width:100%;padding:8px;margin:5px 0;border-radius:5px;border:none}
-.total{font-weight:bold;margin-top:10px}
-.finalizar{background:#d4af37;color:black;font-weight:bold;width:100%;padding:12px;border:none;border-radius:5px;margin-top:10px;cursor:pointer}
-.indisponivel{color:red;font-size:14px}
+body{
+margin:0;
+font-family:Arial;
+background:#111;
+color:white;
+}
+
+header{
+background:linear-gradient(135deg,#000,#1c1c1c);
+padding:30px 20px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+}
+
+h1{
+margin:0;
+font-size:28px;
+}
+
+.sub{
+color:#00ff88;
+margin-top:8px;
+}
+
+.container{
+padding:20px;
+}
+
+.card{
+background:#1c1c1c;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.4);
+}
+
+.controls{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.btn{
+background:#00c853;
+border:none;
+color:white;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.qty{
+min-width:20px;
+text-align:center;
+}
+
+.carrinho{
+background:#000;
+padding:20px;
+position:fixed;
+bottom:0;
+width:100%;
+box-shadow:0 -4px 15px rgba(0,0,0,0.5);
+}
+
+input,select{
+width:100%;
+padding:8px;
+margin:5px 0;
+border-radius:5px;
+border:none;
+}
+
+.finalizar{
+background:#d4af37;
+border:none;
+padding:12px;
+width:100%;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:200px;
+background:#25d366;
+color:white;
+padding:12px 15px;
+border-radius:50px;
+font-weight:bold;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
 </style>
 </head>
+
 <body>
 
-<header style="background: linear-gradient(135deg, #000000, #1c1c1c); padding: 30px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
-    
-    <h1 style="color: #ffffff; font-size: 30px; margin: 0; letter-spacing: 1px;">
-        Marcondes Bebidas
-    </h1>
-    
-    <p style="color: #00ff88; font-size: 17px; margin-top: 8px; font-weight: 500;">
-        Comércio de Bebidas • Delivery Rápido em Porto Alegre
-    </p>
-
+<header>
+<h1>Marcondes Bebidas</h1>
+<div class="sub">Comércio de Bebidas • Delivery Rápido em Porto Alegre</div>
 </header>
 
 <div class="container">
 
-<h2>Bebidas</h2>
-
-<div class="produto">
-<span>Heineken 600ml – R$16</span>
-<button onclick="add('Heineken 600ml',16)">Adicionar</button>
+<div class="card">
+<div>Heineken 600ml – R$16</div>
+<div class="controls">
+<button class="btn" onclick="alterar('Heineken 600ml',16,-1)">-</button>
+<div class="qty" id="q1">0</div>
+<button class="btn" onclick="alterar('Heineken 600ml',16,1)">+</button>
+</div>
 </div>
 
-<div class="produto">
-<span>Skol Lata – R$9</span>
-<button onclick="add('Skol Lata',9)">Adicionar</button>
+<div class="card">
+<div>Skol Lata – R$9</div>
+<div class="controls">
+<button class="btn" onclick="alterar('Skol Lata',9,-1)">-</button>
+<div class="qty" id="q2">0</div>
+<button class="btn" onclick="alterar('Skol Lata',9,1)">+</button>
+</div>
 </div>
 
-<div class="produto">
-<span>Coca 2L – R$15</span>
-<button onclick="add('Coca 2L',15)">Adicionar</button>
+<div class="card">
+<div>Coca 2L – R$15</div>
+<div class="controls">
+<button class="btn" onclick="alterar('Coca 2L',15,-1)">-</button>
+<div class="qty" id="q3">0</div>
+<button class="btn" onclick="alterar('Coca 2L',15,1)">+</button>
+</div>
 </div>
 
-<div class="produto">
-<span>Red Bull – R$16</span>
-<button onclick="add('Red Bull',16)">Adicionar</button>
+<div class="card">
+<div>Red Bull – R$16</div>
+<div class="controls">
+<button class="btn" onclick="alterar('Red Bull',16,-1)">-</button>
+<div class="qty" id="q4">0</div>
+<button class="btn" onclick="alterar('Red Bull',16,1)">+</button>
+</div>
 </div>
 
-<div class="produto">
-<span>Gelo 5kg – R$14</span>
-<button onclick="add('Gelo 5kg',14)">Adicionar</button>
+<div class="card">
+<div>Gelo 5kg – R$14</div>
+<div class="controls">
+<button class="btn" onclick="alterar('Gelo 5kg',14,-1)">-</button>
+<div class="qty" id="q5">0</div>
+<button class="btn" onclick="alterar('Gelo 5kg',14,1)">+</button>
 </div>
-
-<h2>Lanches</h2>
-
-<div class="produto">
-<span>X-Salada</span>
-<span class="indisponivel">Indisponível</span>
-</div>
-
-<div class="produto">
-<span>X-Bacon</span>
-<span class="indisponivel">Indisponível</span>
-</div>
-
-<div class="produto">
-<span>Batata Frita</span>
-<span class="indisponivel">Indisponível</span>
 </div>
 
 </div>
 
 <div class="carrinho">
-<h3>Carrinho</h3>
-<div id="lista"></div>
-<div class="total">Total: R$ <span id="total">0</span></div>
+<h3>Total Produtos: R$ <span id="subtotal">0</span></h3>
+<h3>Taxa Entrega: R$ 7,50</h3>
+<h2>Total Final: R$ <span id="total">7.50</span></h2>
 
 <input type="text" id="nome" placeholder="Seu nome">
 <input type="text" id="endereco" placeholder="Seu endereço">
 
 <select id="pagamento">
-<option value="Pix">Pix</option>
-<option value="Cartão na entrega">Cartão na entrega</option>
-<option value="Dinheiro">Dinheiro</option>
+<option>Pix</option>
+<option>Cartão na entrega</option>
+<option>Dinheiro</option>
 </select>
 
 <button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
 </div>
 
-<script>
-let carrinho=[];
-let total=0;
+<a class="whatsapp" href="https://wa.me/5551996408641" target="_blank">
+WhatsApp
+</a>
 
-function add(nome,preco){
-carrinho.push({nome,preco});
-total+=preco;
+<script>
+let carrinho={};
+let taxa=7.50;
+
+function alterar(nome,preco,quant){
+if(!carrinho[nome]) carrinho[nome]={preco:preco,qtd:0};
+carrinho[nome].qtd+=quant;
+if(carrinho[nome].qtd<0) carrinho[nome].qtd=0;
 atualizar();
 }
 
 function atualizar(){
-let lista=document.getElementById("lista");
-lista.innerHTML="";
-carrinho.forEach(item=>{
-lista.innerHTML+=item.nome+" - R$"+item.preco+"<br>";
-});
-document.getElementById("total").innerText=total;
+let subtotal=0;
+let i=1;
+for(let item in carrinho){
+subtotal+=carrinho[item].preco*carrinho[item].qtd;
+document.getElementById("q"+i).innerText=carrinho[item].qtd;
+i++;
+}
+document.getElementById("subtotal").innerText=subtotal.toFixed(2);
+document.getElementById("total").innerText=(subtotal+taxa).toFixed(2);
 }
 
 function finalizar(){
@@ -121,19 +213,20 @@ let nome=document.getElementById("nome").value;
 let endereco=document.getElementById("endereco").value;
 let pagamento=document.getElementById("pagamento").value;
 
-if(carrinho.length==0){alert("Carrinho vazio");return;}
-if(nome==""||endereco==""){alert("Preencha seus dados");return;}
+let mensagem="🛒 NOVO PEDIDO%0A%0ACliente: "+nome+"%0AEndereço: "+endereco+"%0A%0A";
 
-let mensagem="🛒 NOVO PEDIDO%0A%0A";
-mensagem+="Cliente: "+nome+"%0A";
-mensagem+="Endereço: "+endereco+"%0A%0AItens:%0A";
+let subtotal=0;
+for(let item in carrinho){
+if(carrinho[item].qtd>0){
+mensagem+=carrinho[item].qtd+"x "+item+"%0A";
+subtotal+=carrinho[item].preco*carrinho[item].qtd;
+}
+}
 
-carrinho.forEach(item=>{
-mensagem+="- "+item.nome+" (R$"+item.preco+")%0A";
-});
-
-mensagem+="%0ATotal: R$"+total+"%0A";
-mensagem+="Forma de pagamento: "+pagamento;
+mensagem+="%0ASubtotal: R$ "+subtotal.toFixed(2);
+mensagem+="%0ATaxa: R$ 7.50";
+mensagem+="%0ATotal: R$ "+(subtotal+taxa).toFixed(2);
+mensagem+="%0APagamento: "+pagamento;
 
 window.open("https://wa.me/5551996408641?text="+mensagem,"_blank");
 }
