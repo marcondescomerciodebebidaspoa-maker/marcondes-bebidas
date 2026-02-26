@@ -1,34 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Marcondes Bebidas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #22c55e;
-        }
-        .box {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcondes Bebidas</title>
+<style>
+body{font-family:Arial;margin:0;background:#111;color:white}
+header{background:#000;padding:20px;text-align:center}
+h1{color:#d4af37;margin:0}
+.container{padding:20px}
+.produto{background:#1e1e1e;padding:15px;margin:10px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+button{background:#25d366;border:none;padding:8px 12px;color:white;border-radius:5px;cursor:pointer}
+.carrinho{position:fixed;bottom:0;width:100%;background:#000;padding:15px}
+input,select{width:100%;padding:8px;margin:5px 0;border-radius:5px;border:none}
+.total{font-weight:bold;margin-top:10px}
+.finalizar{background:#d4af37;color:black;font-weight:bold;width:100%;padding:12px;border:none;border-radius:5px;margin-top:10px;cursor:pointer}
+.indisponivel{color:red;font-size:14px}
+</style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>Marcondes Comércio de Bebidas</h1>
-        <p>Distribuidora em Porto Alegre</p>
-        <p>Telefone: (51) 99999-9999</p>
-    </div>
+<header>
+<h1>Marcondes Bebidas</h1>
+<p>Bar • Conveniência • Delivery</p>
+</header>
+
+<div class="container">
+
+<h2>Bebidas</h2>
+
+<div class="produto">
+<span>Heineken 600ml – R$16</span>
+<button onclick="add('Heineken 600ml',16)">Adicionar</button>
+</div>
+
+<div class="produto">
+<span>Skol Lata – R$9</span>
+<button onclick="add('Skol Lata',9)">Adicionar</button>
+</div>
+
+<div class="produto">
+<span>Coca 2L – R$15</span>
+<button onclick="add('Coca 2L',15)">Adicionar</button>
+</div>
+
+<div class="produto">
+<span>Red Bull – R$16</span>
+<button onclick="add('Red Bull',16)">Adicionar</button>
+</div>
+
+<div class="produto">
+<span>Gelo 5kg – R$14</span>
+<button onclick="add('Gelo 5kg',14)">Adicionar</button>
+</div>
+
+<h2>Lanches</h2>
+
+<div class="produto">
+<span>X-Salada</span>
+<span class="indisponivel">Indisponível</span>
+</div>
+
+<div class="produto">
+<span>X-Bacon</span>
+<span class="indisponivel">Indisponível</span>
+</div>
+
+<div class="produto">
+<span>Batata Frita</span>
+<span class="indisponivel">Indisponível</span>
+</div>
+
+</div>
+
+<div class="carrinho">
+<h3>Carrinho</h3>
+<div id="lista"></div>
+<div class="total">Total: R$ <span id="total">0</span></div>
+
+<input type="text" id="nome" placeholder="Seu nome">
+<input type="text" id="endereco" placeholder="Seu endereço">
+
+<select id="pagamento">
+<option value="Pix">Pix</option>
+<option value="Cartão na entrega">Cartão na entrega</option>
+<option value="Dinheiro">Dinheiro</option>
+</select>
+
+<button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
+</div>
+
+<script>
+let carrinho=[];
+let total=0;
+
+function add(nome,preco){
+carrinho.push({nome,preco});
+total+=preco;
+atualizar();
+}
+
+function atualizar(){
+let lista=document.getElementById("lista");
+lista.innerHTML="";
+carrinho.forEach(item=>{
+lista.innerHTML+=item.nome+" - R$"+item.preco+"<br>";
+});
+document.getElementById("total").innerText=total;
+}
+
+function finalizar(){
+let nome=document.getElementById("nome").value;
+let endereco=document.getElementById("endereco").value;
+let pagamento=document.getElementById("pagamento").value;
+
+if(carrinho.length==0){alert("Carrinho vazio");return;}
+if(nome==""||endereco==""){alert("Preencha seus dados");return;}
+
+let mensagem="🛒 NOVO PEDIDO%0A%0A";
+mensagem+="Cliente: "+nome+"%0A";
+mensagem+="Endereço: "+endereco+"%0A%0AItens:%0A";
+
+carrinho.forEach(item=>{
+mensagem+="- "+item.nome+" (R$"+item.preco+")%0A";
+});
+
+mensagem+="%0ATotal: R$"+total+"%0A";
+mensagem+="Forma de pagamento: "+pagamento;
+
+window.open("https://wa.me/5551996408641?text="+mensagem,"_blank");
+}
+</script>
 
 </body>
 </html>
